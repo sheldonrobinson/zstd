@@ -44,6 +44,7 @@ endif()
 option(ZSTD_BUILD_PROGRAMS "Build command-line programs" ON)
 option(ZSTD_BUILD_CONTRIB "Build contrib utilities" OFF)
 option(ZSTD_PROGRAMS_LINK_SHARED "Link programs against shared library" OFF)
+option(ZSTD_INSTALL "BUILD DEPRECATED MODULE" OFF)
 
 # Test configuration
 if(BUILD_TESTING)

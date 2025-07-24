@@ -42,9 +42,11 @@ target_link_libraries(zstd ${PROGRAMS_ZSTD_LINK_TARGET})
 if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
     target_link_libraries(zstd rt)
 endif ()
-install(TARGETS zstd
-  RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
+if(ZSTD_INSTALL)
+	install(TARGETS zstd
+	  RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+	  BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
+endif()
 
 if (UNIX)
     add_custom_target(zstdcat ALL ${CMAKE_COMMAND} -E create_symlink zstd zstdcat DEPENDS zstd COMMENT "Creating zstdcat symlink")
@@ -96,7 +98,9 @@ if (ZSTD_MULTITHREAD_SUPPORT)
         target_link_libraries(zstd ${THREADS_LIBS})
 
         add_custom_target(zstdmt ALL ${CMAKE_COMMAND} -E create_symlink zstd zstdmt DEPENDS zstd COMMENT "Creating zstdmt symlink")
-        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/zstdmt DESTINATION "${CMAKE_INSTALL_BINDIR}")
+		if(ZSTD_INSTALL)
+			install(FILES ${CMAKE_CURRENT_BINARY_DIR}/zstdmt DESTINATION "${CMAKE_INSTALL_BINDIR}")
+		endif()
     endif ()
 endif ()
 

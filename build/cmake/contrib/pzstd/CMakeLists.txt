@@ -36,4 +36,6 @@ else()
     message(SEND_ERROR "ZSTD currently does not support thread libraries other than pthreads")
 endif()
 
-install(TARGETS pzstd RUNTIME DESTINATION "bin")
+if(ZSTD_INSTALL)
+	install(TARGETS pzstd RUNTIME DESTINATION "bin")
+endif()

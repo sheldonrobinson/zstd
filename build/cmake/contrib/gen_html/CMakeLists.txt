@@ -26,5 +26,6 @@ set(LIBVERSION "${VMAJOR}.${VMINOR}.${VRELEASE}")
 add_custom_target(zstd_manual.html ALL
                   ${GENHTML_BINARY} "${LIBVERSION}" "${LIBRARY_DIR}/zstd.h" "${PROJECT_BINARY_DIR}/zstd_manual.html"
                   DEPENDS gen_html COMMENT "Update zstd manual")
-
-install(FILES "${PROJECT_BINARY_DIR}/zstd_manual.html" DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+if(ZSTD_INSTALL)
+	install(FILES "${PROJECT_BINARY_DIR}/zstd_manual.html" DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+endif()
